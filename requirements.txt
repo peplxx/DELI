@@ -1,0 +1,4 @@
+aiogram~=2.12
+requests
+SQLAlchemy~=2.0.20
+SQLAlchemy-serializer~=1.4.1
