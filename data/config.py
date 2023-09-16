@@ -1,7 +1,5 @@
-BOT_TOKEN = "6642203062:AAFLrwrgLQCPgDwgT6OQ32LhBnahBoHVV8U"
-ADMINS = [
-    "1591962102",
-]
+BOT_TOKEN = "PLACE YOUR BOT API HERE"
+
 
 DB_NAME = 'database.db'
 default_groups_limit = 5
