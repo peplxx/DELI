@@ -1,9 +1,9 @@
 from aiogram import Bot, Dispatcher, types
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 
+from data import config
 from data.database import db_session
 from utils.utils import Notificator
-from data import config
 
 
 class Cleaner:
@@ -21,12 +21,12 @@ class Cleaner:
         for entity in self.entity_list[user_id]:
             try:
                 await entity.delete()
-            except:
+            except Exception as _:
                 continue
         self.entity_list[user_id] = []
 
-    async def send_message(self,message,*args,**kwargs):
-        msg = await message.answer(*args,**kwargs)
+    async def send_message(self, message, *args, **kwargs):
+        msg = await message.answer(*args, **kwargs)
         self.add(msg)
 
 

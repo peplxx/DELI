@@ -1,18 +1,23 @@
+from aiogram import types
 from aiogram.dispatcher import FSMContext
-from aiogram.dispatcher.filters.state import StatesGroup, State
+from aiogram.dispatcher.filters import Text
+from aiogram.dispatcher.filters.state import State, StatesGroup
 
+# DataBase classes
+from data.database.groups import Group
+from data.database.users import User
 from data.Keyboards.Inline.cancel import cancel_keyboard
 from data.Keyboards.Inline.generative_kb import GenerativeKeyboard
-from data.database.users import User
-from loader import dp, bot, cleaner, session, notificator
-from aiogram import types
-from aiogram.dispatcher.filters import Text
-
+from data.Keyboards.Inline.notification import notification
+# Keyboards
+from data.Keyboards.Reply.menu import (check_menu, group_menu, menu,
+                                       profile_menu)
+from loader import cleaner, dp, notificator, session
 from utils.utils import user_dict
 
 
 class INPUT(StatesGroup):
-    # TODO Beter naming of states
+    # isortTODO Better naming of states
     keyword = State()
     group_name = State()
 
@@ -42,7 +47,6 @@ async def user_to_group(message: types.Message, state: FSMContext):
         await message.answer(f"Successfully joined to group!\n\n"
                              f"Group Name: {group.name}")
 
-        # TODO Admin notifications about new member
         # TODO Normal user notification format
 
     await state.finish()
@@ -79,18 +83,12 @@ async def make_group(message: types.Message, state: FSMContext):
     creator.add_group(group_id=new_group.id)
     session.commit()
 
-    f'Group was created successfully!\n\n'
+    'Group was created successfully!\n\n'
     groupmasg, reply = group_msg(new_group)
-    await message.answer(f'Group was created successfully!\n\n' + groupmasg,
+    await message.answer('Group was created successfully!\n\n' + groupmasg,
                          reply_markup=reply)
     await state.finish()
 
-
-# DataBase classes
-from data.database.groups import Group
-# Keyboards
-from data.Keyboards.Reply.menu import menu, profile_menu, check_menu, group_menu
-from data.Keyboards.Inline.notification import notification
 
 @dp.message_handler(commands=["help"])
 @dp.message_handler(Text(contains='Help'))

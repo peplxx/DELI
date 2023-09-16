@@ -1,16 +1,14 @@
-import sqlite3
 
 from aiogram import types
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.builtin import Text
 from aiogram.dispatcher.filters.state import State, StatesGroup
 
+from data.database.users import User
 from data.Keyboards.Inline.approving import approving
 from data.Keyboards.Inline.cancel import cancel_keyboard
-from loader import dp, bot, cleaner, session
-
-from data.database.users import User
-from data.Keyboards.Reply.menu import profile_options, menu
+from data.Keyboards.Reply.menu import menu, profile_options
+from loader import cleaner, dp, session
 from utils.utils import user_dict
 
 
@@ -56,7 +54,6 @@ async def fill_phone_number(message: types.Message, state: FSMContext):
 
 @dp.message_handler(state=PAYMENT.bank)
 async def fill_bank(message: types.Message, state: FSMContext):
-    # TODO mb button selection
     await cleaner.clean(message.chat.id)
     cleaner.add(message)
     info = await state.get_data()

@@ -21,4 +21,4 @@ quick_start = "🌟 Quick start with DELI 🌟\n" \
               "That's all for now,\n" \
               "Do not to complicate your life 🤩\n"
 
-help_message = f""
+help_message = ""

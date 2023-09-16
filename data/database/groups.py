@@ -1,13 +1,14 @@
 import json
+import random
+from string import ascii_uppercase
 
 import sqlalchemy
 from sqlalchemy_serializer import SerializerMixin
 
-from .db_session import SqlAlchemyBase
-from string import ascii_uppercase
-import random
 from data.config import max_users_in_group
 from loader import session
+
+from .db_session import SqlAlchemyBase
 from .users import User
 
 

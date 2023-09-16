@@ -1,7 +1,7 @@
 from data.database import db_session
+from data.database.checks import Check
 from data.database.groups import Group
 from data.database.users import User
-from data.database.checks import Check
 
 # Run this file if there are any problems with database
 

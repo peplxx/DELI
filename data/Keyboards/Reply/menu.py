@@ -1,5 +1,5 @@
-from aiogram.types import ReplyKeyboardMarkup,KeyboardButton
-from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+from aiogram.types import (InlineKeyboardButton, InlineKeyboardMarkup,
+                           KeyboardButton, ReplyKeyboardMarkup)
 
 menu = ReplyKeyboardMarkup(row_width=2)
 menu.add(KeyboardButton('Profile👤'))

@@ -1,8 +1,8 @@
-import sqlite3
+
 
 from aiogram import executor
+
 from loader import dp
-from handlers.users import start,menu,profile
 
 #async def on_startup(dispatcher):
     # Уведомляет про запуск

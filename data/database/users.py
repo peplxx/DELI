@@ -2,7 +2,9 @@ import json
 
 import sqlalchemy
 from sqlalchemy_serializer import SerializerMixin
+
 from data.config import default_groups_limit
+
 from .db_session import SqlAlchemyBase
 
 
