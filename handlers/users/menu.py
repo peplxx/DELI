@@ -16,13 +16,12 @@ from loader import cleaner, dp, notificator, session
 from utils.utils import user_dict
 
 
-class INPUT(StatesGroup):
-    # isortTODO Better naming of states
+class JoinGroupState(StatesGroup):
     keyword = State()
     group_name = State()
 
 
-@dp.message_handler(state=INPUT.keyword)
+@dp.message_handler(state=JoinGroupState.keyword)
 async def user_to_group(message: types.Message, state: FSMContext):
     await cleaner.clean(message.chat.id)
     cleaner.add(message)
@@ -57,7 +56,7 @@ async def user_to_group(message: types.Message, state: FSMContext):
 async def join_into_group(message: types.Message):
     cleaner.add(message)
     await cleaner.send_message(message, 'Enter group keyword:', reply_markup=cancel_keyboard)
-    await INPUT.keyword.set()
+    await JoinGroupState.keyword.set()
 
 
 def group_msg(group):
@@ -70,7 +69,7 @@ def group_msg(group):
         GenerativeKeyboard([['Return to menu', 'return_to_menu']]).kb]
 
 
-@dp.message_handler(state=INPUT.group_name)
+@dp.message_handler(state=JoinGroupState.group_name)
 async def make_group(message: types.Message, state: FSMContext):
     await cleaner.clean(message.chat.id)
     cleaner.add(message)
@@ -183,7 +182,7 @@ async def create_group(message: types.Message):
     user = session.query(User).filter(User.id == message.chat.id).first()
     if len(user.groups) < int(user.grouplimit):
         await cleaner.send_message(message, "Enter group name:", reply_markup=cancel_keyboard)
-        await INPUT.group_name.set()
+        await JoinGroupState.group_name.set()
     else:
         await cleaner.send_message(message, "You have reached max group limit!", reply_markup=notification)
 

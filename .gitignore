@@ -158,3 +158,4 @@ main.db
 .linter.bat
 linter.bat
 .ruff_cache/
+main.db
